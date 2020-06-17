@@ -1,0 +1,24 @@
+version: "3"
+services:
+  database:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=root
+      - MYSQL_PASS=password
+    volumes:
+      - sqldata:/var/lib/mysql
+  httpbin:
+    image: kennethreitz/httpbin
+  testservice:
+    build: .
+    environment: 
+      - DATABASE=database_development
+      - HTTPBIN=http://httpbin
+    restart: always
+    ports:
+      - "80:80"
+
+volumes:
+  sqldata:

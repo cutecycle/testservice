@@ -26,6 +26,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
   config.vm.network "forwarded_port", guest: 443, host: 4443, host_ip: "127.0.0.1"
   config.vm.network "forwarded_port", guest: 8001, host: 8001, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 6443, host: 6443, host_ip: "127.0.0.1"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -56,7 +57,7 @@ Vagrant.configure("2") do |config|
     vb.gui = false
   
     # Customize the amount of memory on the VM:
-    vb.memory = "2048"
+    vb.memory = "4096"
   end
   #
   # View the documentation for the provider you are using for more
@@ -70,15 +71,19 @@ Vagrant.configure("2") do |config|
     echo "export HOME=/usr/src/app" >> ~/.profile
     snap install microk8s --classic
     snap install helm --classic
-    apt install -y docker.io
+    sudo apt update
+    sudo apt install -y docker.io docker-compose nodejs npm
     helm repo add stable https://kubernetes-charts.storage.googleapis.com/
     sudo usermod -a -G microk8s vagrant
     sudo chown -f -R vagrant ~/.kube
-    docker build . -t ninaaaaaaaa/testservice:latest
-    microk8s start
-    microk8s enable proxy dashboard dns ingress
-    microk8s kubectl -n kube-system describe secret $token
-    microk8s.kubectl apply -f deployment.yaml
+    docker pull mysql
+    # docker run -d -p 5000:5000 --restart=always --name localregistry registry:2
+    # docker build . -t localhost:5000/ninaaaaaaaa/testservice:latest
+    # microk8s start
+    # microk8s enable proxy dashboard dns ingress
+    # microk8s.kubectl apply -f deployment.yaml
+    sudo docker-compose build
+    sudo docker-compose up -d 
 
 
   SHELL
