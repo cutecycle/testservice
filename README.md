@@ -26,7 +26,7 @@ POST /customers
 ```
 Passwords are `bcrypt` hashed before storage and hashes are not returned via API. 
 
-## Creating Certificates
+## Creating Certificates and their customer associations
 ```
 POST /customers/:id/certificates
 {
@@ -36,7 +36,7 @@ POST /customers/:id/certificates
 }
 
 ```
-private keys will never be returned
+Private keys will never be returned to the 
 
 ## Deactivating Certificates
 ```
@@ -49,6 +49,11 @@ This will send a `POST` to the httpbin defined in the environment variable `HTTP
 
 ## Persistence
 The MySQL datastore is persisted to the Docker volume `sqldata`.
+
+
+## Tests
+
+`node test.js` from the host.
 
 ## 
 # Deployment

@@ -28,7 +28,7 @@ const getCustomers = async function (req, res, next) {
     let response = {};
 
     try {
-        response = await selectCustomers(req, res, next)
+        response = { customers: await selectCustomers(req, res, next) }
         status = 200
     } catch (e) {
         response = { error: e }
@@ -47,11 +47,13 @@ const postCustomers = async function (req, res, next) {
         let newCustomer = {
             name: req.body.name,
             email: req.body.email,
-            passwordHash:genHash 
+            passwordHash: genHash
         }
         const out = await req.app.tables.customers.create(newCustomer)
         status = 200
-        response = req.app.tables.customers.findAll()
+        response = {
+            customers: await selectCustomers(req, res, next)
+        }
 
     } catch (e) {
         console.log(e)
