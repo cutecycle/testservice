@@ -9,12 +9,6 @@ services:
       - MYSQL_PASS=password
     volumes:
       - sqldata:/var/lib/mysql
-  testsuite:
-    image: node:slim
-    restart: always
-    volumes:
-      - ".:/usr/src/app"
-    command: "node /usr/src/app/test.js"
   testservice:
     build: .
     environment: 

@@ -12,6 +12,7 @@ module.exports = {
     return queryInterface.createTable('certificates', {
       id: {
         type: Sequelize.DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true
       },
       publicKey: Sequelize.DataTypes.STRING,

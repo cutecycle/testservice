@@ -12,6 +12,7 @@ module.exports = {
     return queryInterface.createTable('customers', {
       id: {
         type: Sequelize.DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true
       },
       name: Sequelize.DataTypes.STRING,
