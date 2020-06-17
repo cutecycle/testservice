@@ -15,8 +15,10 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       },
+      customerId: Sequelize.DataTypes.INTEGER,
       publicKey: Sequelize.DataTypes.STRING,
       privateKey: Sequelize.DataTypes.STRING,
+      active: Sequelize.DataTypes.BOOLEAN,
       createdAt: {
         field: 'createdAt',
         type: Sequelize.DATE,

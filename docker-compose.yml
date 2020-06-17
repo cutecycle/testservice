@@ -9,10 +9,13 @@ services:
       - MYSQL_PASS=password
     volumes:
       - sqldata:/var/lib/mysql
+  httpbin:
+    image: kennethreitz/httpbin
   testservice:
     build: .
     environment: 
       - DATABASE=database_development
+      - HTTPBIN=http://httpbin
     restart: always
     ports:
       - "80:80"
