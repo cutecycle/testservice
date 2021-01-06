@@ -18,7 +18,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "express-swagger-generator": "^1.1.17",
     "got": "^11.3.0",
     "node-fetch": "^2.6.0",
